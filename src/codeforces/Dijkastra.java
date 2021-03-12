@@ -36,29 +36,14 @@ public class Dijkastra {
 			List<Edge> tmp = new ArrayList<>();
 			adj.add(tmp);
 		}
-		//System.out.println("adj_size="+adj.size());
 		for(int i =0; i<m; i++){
 			int s = in.nextInt()-1;
 			int e = in.nextInt()-1;
 			int w = in.nextInt();
-			//System.out.println(String.format("s=%s,w=%s, e=%s", s,w, e));
-
-			//System.out.println("before"+adj.get(s));
-			//Edge e1 = new Edge(e, w, s);
-			//Edge e2 = new Edge(s,w, e);
-			//System.out.println("edge1="+e1+",edge2="+e2);
-			//adj.get(s).add(e1);
 			adj.get(s).add(new Edge(e, w, s));
-			//System.out.println("after"+adj.get(s));
-			//adj.get(e).add(e2);
 			adj.get(e).add(new Edge(s,w, e));
 		}
 		
-		/*for(int i =0; i<n; i++){
-			String s = String.format("u=%s, adjL=%s", i, adj.get(i));
-			System.out.println(s);
-		}*/
-		//System.out.println(adj);
 		boolean visited[] = new boolean[n];
 		int [] from = new int[n];
 		Arrays.fill(visited, false);
@@ -67,8 +52,6 @@ public class Dijkastra {
 		pq.add(new Edge(0, 0, -1));
 		while (!pq.isEmpty()){
 			Edge now = pq.poll();
-			//System.out.println(String.format("removing edge: %s", now));
-			//System.out.println(adj.get(now.loc));
 			if(visited[now.loc])
 				continue;
 			visited[now.loc] = true;
@@ -77,7 +60,6 @@ public class Dijkastra {
 				pq.add(new Edge(to.loc, to.weight + now.weight, now.loc));
 			}
 		}
-		//System.out.println(Arrays.toString(visited));
 		if(!visited[n-1])
 			System.out.println(-1);
 		else
