@@ -3,6 +3,22 @@ import java.util.*;
 
 public class BinarySearch{
 	
+	public static int smallestInCyclicArray(List<Integer> arr){
+		
+		int n = arr.size();
+		int l = 0;
+		int h = n-1;
+		while(l < h){
+			int mid = l + (h - l)/2;
+			if(arr.get(mid) > arr.get(h)){
+				l = mid + 1;
+			}
+			else{
+				h = mid;
+			}
+		}
+		return l;
+	}		
 	public static int lowerThanEqualTo(List<Integer> arr, int k){
 		int n = arr.size();
 		int l = 0;
@@ -48,9 +64,8 @@ public class BinarySearch{
 		int t = sc.nextInt();
 		for(int i =0; i<t; i++){
 			int k = sc.nextInt();
-			int ndx1 = lowerThanEqualTo(arr, k);
-			int ndx2 = lowerThanEqualTo(arr, k+1);
-			System.out.println(String.format("[%s, %s]", ndx1, ndx2-1));
+			int ndx = smallestInCyclicArray(arr);
+			System.out.println(String.format("ans=%s", ndx));
 		}
 	}
 }
